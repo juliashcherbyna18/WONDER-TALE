@@ -180,7 +180,7 @@ section {
 
 .home {
   min-height: 80vh;
-  background: url(../images/фон.png) no-repeat;
+  background: url(../images/background.png) no-repeat;
   background-size: cover;
   background-position: center;
 }
