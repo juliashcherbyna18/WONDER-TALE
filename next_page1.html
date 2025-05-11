@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Квіз: Обери свого супутника</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url(../images/фон.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      padding: 20px 30px;
+      border-radius: 20px;
+    }
+
+    .question {
+      display: none;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      background-color: rgba(0, 0, 0, 0.65);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .question.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .answers button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #2d2d2d;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .answers button:hover {
+      background-color: #444;
+    }
+
+    #result {
+      display: none;
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    #result h2, #result h3 {
+      margin-bottom: 20px;
+    }
+
+    #result p {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    .home-button {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #2d2d2d;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 12px;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Хто стане твоїм вірним компаньйоном у подорожі?</h1>
+
+  <div id="quiz"></div>
+  <div id="result"></div>
+
+  <script>
+    const questions = [
+      "Яким має бути твій ідеальний супутник?",
+      "Як твій компаньйон захищає тебе?",
+      "Що він робить, коли ти засмучений(-а)?",
+      "Як він пересувається?",
+      "Що він любить їсти?",
+      "Як виглядає його очі?",
+      "Яке його головне вміння?",
+      "Де ви вперше зустрілись?",
+      "Що він робить під час битви?",
+      "Яка його слабкість?"
+    ];
+
+    const answers = [
+      ["Могутній і величний дракон", "Мудрий лісовий ельф", "Тіньовий дух, що з’являється в темряві", "Весела магічна кішка", "Гордий грифон", "Кам’яний голем з добрим серцем"],
+      ["Випускає полум’я", "Стріляє з лука", "Розчиняється в тіні й атакує зненацька", "Кусає і дряпається", "Наносить удар з повітря", "Захищає тебе щитом зі скелі"],
+      ["Розповідає казки", "Мовчки поруч", "Обіймає своїм хвостом", "Танцює, щоб підняти настрій", "Дарує магічний кристал", "Мовчки сидить поруч і світиться"],
+      ["Летить у небі", "Біжить лісовими стежками", "Зникає і з’являється поруч", "Стрибає, як тінь", "Летить із ревом", "Йде важко, але впевнено"],
+      ["Дим і вогонь", "Лісові ягоди", "Енергія нічного неба", "Риба або молоко", "Сяючі зорі", "Каміння і кристали"],
+      ["Жовті та палаючі", "Зелені та глибокі", "Чорні, як ніч", "Веселі й блискучі", "Сяючі, як зорі", "Сірі з іскорками"],
+      ["Лікує", "Бачить майбутнє", "Проходить крізь стіни", "Відчуває емоції", "Керує погодою", "Зупиняє час"],
+      ["У горах", "У лісі", "У тумані", "На ринку", "На даху башти", "У печері"],
+      ["Б’ється пліч-о-пліч", "Планує тактику", "Ховається і завдає удар з тіні", "Захищає тебе", "Відволікає ворога", "Ламає землю навколо"],
+      ["Не любить яскраве світло", "Сумує в самотності", "Зникає в дощ", "Лякається гучних звуків", "Швидко втомлюється", "Розсипається при сильному ударі"]
+    ];
+
+    const moons = ["Дракон", "Ельф", "Тіньовий дух", "Магічна кішка", "Грифон", "Голем"];
+    const scores = [0, 0, 0, 0, 0, 0];
+
+    const quizContainer = document.getElementById("quiz");
+    const resultContainer = document.getElementById("result");
+
+    let currentQuestion = 0;
+
+    function showQuestion(index) {
+      quizContainer.innerHTML = "";
+      const qDiv = document.createElement("div");
+      qDiv.className = "question active";
+
+      const qText = document.createElement("h2");
+      qText.textContent = questions[index];
+      qDiv.appendChild(qText);
+
+      const answersDiv = document.createElement("div");
+      answersDiv.className = "answers";
+
+      answers[index].forEach((answer, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = answer;
+        btn.onclick = () => {
+          scores[i]++;
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion(currentQuestion);
+          } else {
+            showResults();
+          }
+        };
+        answersDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(answersDiv);
+      quizContainer.appendChild(qDiv);
+    }
+
+    function showResults() {
+      quizContainer.innerHTML = "";
+      resultContainer.style.display = "block";
+
+      const total = scores.reduce((a, b) => a + b, 0);
+      const percentages = scores.map(score => Math.round((score / total) * 100));
+
+      resultContainer.innerHTML = "<h2>Результати:</h2>";
+      percentages.forEach((percent, i) => {
+        const p = document.createElement("p");
+        p.textContent = `${moons[i]}: ${percent}%`;
+        resultContainer.appendChild(p);
+      });
+
+      const maxScore = Math.max(...scores);
+      const winner = moons[scores.indexOf(maxScore)];
+
+      const final = document.createElement("h3");
+      final.textContent = `Твій компаньйон на цю подорож: ${winner}!`;
+      resultContainer.appendChild(final);
+
+      const homeLink = document.createElement("a");
+      homeLink.href = "index.html";
+      homeLink.className = "home-button";
+      homeLink.textContent = "Повернутися на головну";
+      resultContainer.appendChild(homeLink);
+    }
+
+    showQuestion(currentQuestion);
+  </script>
+
+</body>
+</html>

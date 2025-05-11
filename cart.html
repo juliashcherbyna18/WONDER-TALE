@@ -1,0 +1,266 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LogikaShop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        font-family: 'Ubuntu', sans-serif;
+      }
+  
+      body {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('../images/фон.png') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        color: #f8f9fa;
+      }
+  
+      .header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #46115e;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.header .flex{
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header .logo{
+  font-weight: bolder;
+  font-size: 2.5rem;
+  color: #f4f4f4;
+  font-family: nunito;
+}
+
+
+
+.header .flex .navbar a {
+  margin: 0 1rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.header .flex .navbar a:hover {
+  text-decoration: underline;
+}
+
+.header .flex .btn {
+  margin-top: 0;
+}
+  
+      .navbar a {
+        color: #ffffff;
+        margin: 0 10px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+  
+      .navbar a:hover {
+        color: #ffc107;
+      }
+  
+      .icons .fas {
+        color: white;
+        font-size: 1.2rem;
+        margin-left: 15px;
+        cursor: pointer;
+      }
+  
+      h2 {
+        font-weight: 600;
+        color: #ffc107;
+      }
+  
+      .cart-btn {
+        background-color: #ffc107;
+        color: #212529;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+      }
+  
+      .cart-btn:hover {
+        background-color: #e0a800;
+      }
+  
+      .order-form .form-control,
+      .order-form .form-select {
+        background-color: #f8f9fa;
+        color: #212529;
+        border-radius: 8px;
+      }
+  
+      .order-form label {
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+  
+      .cart, .order {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #212529;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+  
+      footer {
+        background-color: #000;
+        color: #f8f9fa;
+        padding: 30px 10px;
+        text-align: center;
+      }
+  
+      #themeToggle {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease;
+      }
+  
+      #themeToggle:hover {
+        transform: rotate(20deg);
+      }
+  
+      @media (max-width: 768px) {
+        .navbar a {
+          display: block;
+          margin: 10px 0;
+        }
+      }
+    </style>
+  </head>
+  
+<body>
+
+ <!-- header section starts      -->
+<!-- header section starts      -->
+
+<header class="header">
+
+    <section class="flex">
+
+        <a href="#" class="logo"> <i class="fas fa-magic"></i> WONDER TALE </a>
+
+        <nav class="navbar">
+            <a href="#home">ГОЛОВНА</a>
+            <a href="#services">ГРА</a>
+            <a href="#about">ПЕРЕВАГИ</a>
+            <a href="#pricing">МЕРЧ та КОМ'ЮНІТІ</a>
+            <a href="#reviews"> ПИТАННЯ</a>
+        </nav>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div class="icons">
+            <div class="fas fa-moon" id="theme-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+            <div class="fas fa-shopping-cart" id="login-btn"></div>
+        </div>
+
+    </section>
+
+    
+
+</header>
+
+<!-- header section ends -->
+
+<!-- header section ends -->
+
+  <main class="container cart-page my-5">
+
+    <section class="cart py-4">
+      <h2>Ваш кошик</h2>
+      <div class="cart-items-list mb-3">
+        У кошику ще немає товарів
+      </div>
+      <div class="margin-y">
+        Сума замовлення: <span class="cart-total">0</span> грн.
+      </div>
+      <button id="orderBtn" class="cart-btn">Оформити замовлення</button>
+    </section>
+
+    <section class="order my-5">
+      <h2>Оформлення замовлення</h2>
+      <form class="order-form" action="#" method="post">
+        <div class="form-group mt-3">
+          <label for="firstName">Ім'я:</label>
+          <input class="form-control" type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group mt-3">
+          <label for="lastName">Прізвище:</label>
+          <input class="form-control" type="text" id="lastName" name="lastName" required>
+        </div>
+        <div class="form-group mt-3">
+          <label for="email">Електронна пошта:</label>
+          <input class="form-control" type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group mt-3">
+          <label for="phone">Номер телефону:</label>
+          <input class="form-control" type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group mt-3">
+          <label for="deliveryMethod">Спосіб доставки:</label>
+          <select class="form-select" id="deliveryMethod" name="deliveryMethod" required>
+            <option value="standard">Нова пошта</option>
+            <option value="express">Укрпошта</option>
+          </select>
+        </div>
+        <div class="form-group mt-3">
+          <label for="address">Адреса доставки:</label>
+          <input class="form-control" type="text" id="address" name="address" required>
+        </div>
+        <div class="form-group mt-3">
+          <label for="comment">Коментар:</label>
+          <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+        </div>
+        <button type="submit" class="cart-btn margin-y">Підтвердити</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <button id="themeToggle"><i class="bi bi-brightness-high"></i></button>
+    <p>Logika IT School &copy; 2024</p>
+    <p>Релізний проєкт Ім'я Прізвище</p>
+    <div class="attribution small">
+      Зображення: 
+      <a href="https://www.freepik.com/free-photo/top-view-smartphone-with-keyboard-charger_26211576.htm">Freepik</a> |
+      <a href="https://www.freepik.com/free-photo/high-angle-smartphone-desk-with-headphones_26211747.htm">Freepik</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
+</html>

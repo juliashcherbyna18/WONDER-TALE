@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Обери Королівство</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url(../images/фон.png) no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      backdrop-filter: blur(4px);
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 40px 20px 60px;
+      box-sizing: border-box;
+    }
+
+    .image-container {
+      width: 95%;
+      max-width: 1000px; /* Збільшено */
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .home-button {
+      display: inline-block;
+      padding: 15px 30px;
+      background: rgba(76, 175, 80, 0.85);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(3px);
+    }
+
+    .home-button:hover {
+      background: rgba(56, 142, 60, 0.9);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .home-button {
+        font-size: 16px;
+        padding: 12px 24px;
+      }
+
+      .image-container {
+        max-width: 95%;
+      }
+
+      .content {
+        padding: 30px 15px 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <div class="image-container">
+      <img src="images/КАРТА.png" alt="Карта">
+    </div>
+
+    <a href="index.html" class="home-button">Повернутися на головну</a>
+  </div>
+
+</body>
+</html>

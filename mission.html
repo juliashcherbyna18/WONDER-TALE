@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Обери Королівство</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url(../images/фон.png) no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 50px auto;
+      max-width: 1000px;
+    }
+
+    .kingdom-button {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 2px solid white;
+      border-radius: 12px;
+      padding: 10px;
+      width: 150px;
+      height: 180px;
+      cursor: pointer;
+      color: white;
+      text-shadow: 1px 1px 2px #000;
+      transition: transform 0.3s, background-color 0.3s;
+      flex-basis: calc(33.33% - 20px); /* Встановлює ширину кожної кнопки на третину ширини контейнера */
+      box-sizing: border-box; /* Для врахування padding в ширину */
+    }
+
+    .kingdom-button:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .kingdom-button img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(6px);
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background-color: #222;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid white;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      color: white;
+      position: relative;
+    }
+
+    .close {
+      color: #aaa;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: white;
+    }
+
+    .home-button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .home-button:hover {
+      background-color: #45a049;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>ОБЕРИ КОРОЛІСВТО ДО ЯКОГО ТИ НАЛЕЖИШ -</h1>
+
+  <div class="buttons-container">
+    <div class="kingdom-button" onclick="openModal('modalMermaids')">
+      <img src="images/РУСАЛКИ.png" alt="Русалки">
+      <div>Королівство русалок</div>
+    </div>
+    <div class="kingdom-button" onclick="openModal('modalGoblins')">
+      <img src="images/ГОБЛІНИ.png" alt="Гобліни">
+      <div>Королівство гоблінів</div>
+    </div>
+    <div class="kingdom-button" onclick="openModal('modalBarbarians')">
+      <img src="images/ВАРВАРИ.png" alt="Варвари">
+      <div>Королівство варварів</div>
+    </div>
+    <div class="kingdom-button" onclick="openModal('modalDragons')">
+      <img src="images/ДРАКОНИ.png" alt="Дракони">
+      <div>Королівство драконів</div>
+    </div>
+    <div class="kingdom-button" onclick="openModal('modalDwarves')">
+      <img src="images/ГНОМИ.png" alt="Гноми">
+      <div>Королівство гномів</div>
+    </div>
+    <div class="kingdom-button" onclick="openModal('modalFairies')">
+      <img src="images/ФЕЇ.png" alt="Феї">
+      <div>Королівство фей</div>
+    </div>
+  </div>
+
+  <!-- Модальні вікна -->
+  <div id="modalMermaids" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalMermaids')">&times;</span>
+      <h2>Королівство русалок</h2>
+      <p>Ти належиш до водного царства чарівних створінь!</p>
+    </div>
+  </div>
+
+  <div id="modalGoblins" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalGoblins')">&times;</span>
+      <h2>Королівство гоблінів</h2>
+      <p>Мудрість і хитрість — ось твої головні риси.</p>
+    </div>
+  </div>
+
+  <div id="modalBarbarians" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalBarbarians')">&times;</span>
+      <h2>Королівство варварів</h2>
+      <p>Сила, відвага і свобода — ось що ти цінуєш!</p>
+    </div>
+  </div>
+
+  <div id="modalDragons" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalDragons')">&times;</span>
+      <h2>Королівство драконів</h2>
+      <p>Полум’я в твоєму серці — ти належиш до могутніх драконів!</p>
+    </div>
+  </div>
+
+  <div id="modalDwarves" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalDwarves')">&times;</span>
+      <h2>Королівство гномів</h2>
+      <p>Праця, ремесло та вірність — головні твої цінності.</p>
+    </div>
+  </div>
+
+  <div id="modalFairies" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalFairies')">&times;</span>
+      <h2>Королівство фей</h2>
+      <p>Магія, легкість і мрії ведуть тебе крізь життя.</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      document.querySelectorAll('.modal').forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    }
+  </script>
+
+  <a href="index.html" class="home-button">Повернутися на головну</a>
+
+</body>
+</html>

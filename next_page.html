@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Квіз: Обери своє королівство</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url(../images/фон.png);
+      background-size: cover;
+      background-repeat: repeat;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .header-image {
+      width: 1000px;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: opacity 0.5s ease;
+    }
+
+    #start-button {
+      margin-top: 10px;
+      padding: 18px 45px;
+      font-size: 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: #8629ae;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    #start-button:hover {
+      background-color: #215f2e;
+      transform: scale(1.05);
+    }
+
+    #start-button:active {
+      background-color: #2e6f40;
+      transform: scale(1);
+    }
+
+    #quiz {
+      display: none;
+    }
+
+    .question {
+      display: none;
+      margin-bottom: 30px;
+      background-color: rgba(0, 0, 0, 0.65);
+      padding: 30px;
+      border-radius: 15px;
+      font-size: 24px;
+      transition: opacity 0.5s ease;
+      transform: translateY(50px);
+    }
+
+    .question.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      background-color: #444;
+      color: #fff;
+      font-size: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .answers button:hover {
+      background-color: #666;
+      transform: scale(1.05);
+    }
+
+    .answers button:active {
+      background-color: #555;
+      transform: scale(1);
+    }
+
+    #result {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 15px;
+      font-size: 22px;
+    }
+
+    .home-button {
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 20px;
+      background-color: #444;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+    }
+
+    .home-button:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Квіз: До якого королівства ти належиш?</h1>
+  <img src="images/КАРТА.png" alt="Королівства" class="header-image" id="header-image">
+
+  <!-- Контейнер для кнопки "Почати квіз" -->
+  <div class="button-container">
+    <button id="start-button">Почати квіз</button>
+  </div>
+
+  <!-- Контейнер для квізу -->
+  <div id="quiz"></div>
+
+  <div id="result"></div>
+
+  <script>
+    const questions = [
+      "Який елемент тебе приваблює найбільше?",
+      "Що ти обереш у пригоді?",
+      "Яка риса тобі найближча?",
+      "Яке місце тобі до душі?",
+      "Як ти вирішуєш конфлікти?",
+      "Коли ти найбільш активний(-а)?",
+      "Який тип музики тобі подобається?",
+      "Твоя ідеальна зброя?",
+      "Що тебе найбільше надихає?",
+      "Твій стиль лідерства?"
+    ];
+
+    const answers = [
+      ["Вогонь", "Вода", "Повітря", "Земля", "Світло", "Темрява"],
+      ["Меч", "Посох", "Щит", "Лук", "Магічний кристал", "Кинджал"],
+      ["Хоробрість", "Мудрість", "Свобода", "Стійкість", "Добро", "Рішучість"],
+      ["Вулкан", "Океан", "Гори", "Ліс", "Храм", "Печера"],
+      ["Атакую першим", "Мирно домовляюсь", "Іду, куди вітер дме", "Стійко тримаю позицію", "Пропоную компроміс", "Дію з тіні"],
+      ["Вранці", "Опівдні", "На заході", "Уночі", "На світанку", "У бурю"],
+      ["Рок", "Класика", "Джаз", "Фолк", "Епік", "Темна електроніка"],
+      ["Вогненний меч", "Посох води", "Повітряний клинок", "Кам'яний молот", "Променевий лук", "Тіньовий кинджал"],
+      ["Перемога", "Мир", "Воля", "Сила", "Надія", "Помста"],
+      ["Борюся на передовій", "Веду мудро", "Надихаю", "Захищаю", "Свічу прикладом", "Маніпулюю з тіні"]
+    ];
+
+    const kingdoms = ["Королівство Русалок", "Королівство Гномів", "Королівство Варварів", "Королівство Гоблінів", "Королівство Драконів", "Королівство Фей"];
+    const scores = [0, 0, 0, 0, 0, 0];
+
+    const quizContainer = document.getElementById("quiz");
+    const resultContainer = document.getElementById("result");
+    const startButton = document.getElementById("start-button");
+    const headerImage = document.getElementById("header-image");
+
+    let currentQuestion = 0;
+
+    // Показати питання
+    function showQuestion(index) {
+      quizContainer.innerHTML = "";
+      const qDiv = document.createElement("div");
+      qDiv.className = "question active";
+
+      const qText = document.createElement("h2");
+      qText.textContent = questions[index];
+      qDiv.appendChild(qText);
+
+      const answersDiv = document.createElement("div");
+      answersDiv.className = "answers";
+
+      answers[index].forEach((answer, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = answer;
+        btn.onclick = () => {
+          scores[i]++;
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion(currentQuestion);
+          } else {
+            showResults();
+          }
+        };
+        answersDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(answersDiv);
+      quizContainer.appendChild(qDiv);
+    }
+
+    // Показати результати
+    function showResults() {
+      quizContainer.innerHTML = "";
+      resultContainer.style.display = "block";
+
+      const total = scores.reduce((a, b) => a + b, 0);
+      const percentages = scores.map(score => Math.round((score / total) * 100));
+
+      resultContainer.innerHTML = "<h2>Результати:</h2>";
+      percentages.forEach((percent, i) => {
+        const p = document.createElement("p");
+        p.textContent = `${kingdoms[i]}: ${percent}%`;
+        resultContainer.appendChild(p);
+      });
+
+      const maxScore = Math.max(...scores);
+      const winner = kingdoms[scores.indexOf(maxScore)];
+
+      const final = document.createElement("h3");
+      final.textContent = `Ти належиш до: ${winner}!`;
+      resultContainer.appendChild(final);
+
+      const homeButton = document.createElement("a");
+      homeButton.className = "home-button";
+      homeButton.href = "index.html";
+      homeButton.textContent = "Повернутися на головну";
+      resultContainer.appendChild(homeButton);
+    }
+
+    // Слухач для кнопки початку квізу
+    startButton.addEventListener("click", () => {
+      startButton.style.display = "none";  // Приховуємо кнопку
+      headerImage.style.display = "none";  // Зникає зображення
+      quizContainer.style.display = "block";  // Показуємо квіз
+      showQuestion(currentQuestion);  // Починаємо квіз
+    });
+  </script>
+
+</body>
+</html>
